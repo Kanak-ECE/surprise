@@ -33,9 +33,7 @@ body {
   cursor: pointer;
   transition: transform 0.5s;
 }
-.envelope:hover {
-  transform: scale(1.05);
-}
+.envelope:hover { transform: scale(1.05); }
 
 .envelope:before {
   content: "";
@@ -69,13 +67,17 @@ body {
   font-size: 16px;
   line-height: 1.6;
   white-space: pre-line;
-  animation: zoom 20s ease-in-out infinite alternate;
 }
 
-/* slow zoom */
-@keyframes zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.05); }
+/* Button */
+.btn {
+  margin-top: 20px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  background: #ff4b5c;
+  color: white;
+  cursor: pointer;
 }
 
 /* Photos */
@@ -93,16 +95,6 @@ body {
   object-fit: cover;
   border-radius: 20px;
   border: 3px dashed white;
-  transform: rotate(-3deg);
-  transition: 0.3s;
-}
-
-.photos img:hover {
-  transform: scale(1.1) rotate(0deg);
-}
-
-.photos img:nth-child(even) {
-  transform: rotate(3deg);
 }
 
 /* Hearts */
@@ -117,59 +109,69 @@ body {
   100% { transform: translateY(-100vh); opacity: 0; }
 }
 
-/* Final */
-.final {
+/* Page 3 Bouquet */
+.bouquet {
+  font-size: 70px;
+  animation: bloom 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes bloom {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+.final-text {
   margin-top: 20px;
-  font-size: 22px;
+  font-size: 20px;
+  max-width: 400px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Page 1 -->
+<!-- PAGE 1 -->
 <div class="container" id="page1">
   <h2>For Deb ❤️</h2>
   <div class="envelope" onclick="openLetter()"></div>
   <p>Tap the envelope 💌</p>
 </div>
 
-<!-- Page 2 -->
+<!-- PAGE 2 -->
 <div class="container hidden" id="page2">
 
   <div class="letter" id="letterText"></div>
 
-  
-<button onclick="showBouquet()" style="
-  margin-top:20px;
-  padding:10px 20px;
-  border:none;
-  border-radius:20px;
-  background:#ff4b5c;
-  color:white;
-  font-size:16px;
-  cursor:pointer;">
-  Tap here 💖
-</button>
+  <button class="btn" onclick="goToBouquet()">Next ➝</button>
 
-<div id="bouquetPage" class="hidden" style="margin-top:30px; text-align:center;">
+  <div class="photos">
+    <img src="https://i.ibb.co/8DyD33qR/img1.jpg">
+    <img src="https://i.ibb.co/Lh2SsMH2/img2.jpg">
+    <img src="https://i.ibb.co/VYvvVWY3/img3.jpg">
+    <img src="https://i.ibb.co/TBqKtxhK/img4.jpg">
+    <img src="https://i.ibb.co/M5NXhHQk/img5.jpg">
+  </div>
 
-
-</div>
-  <h2>Sending you this virtual bouquet 💐</h2>
-  <p>and lots of hugs and kisses 🤗❤️</p>
-
-  <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11"
-       style="width:220px; border-radius:15px; margin-top:15px;">
-</div>
-  <!-- 🎶 MUSIC -->
   <audio id="music" loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
 </div>
 
+<!-- PAGE 3 (BOUQUET) -->
+<div class="container hidden" id="page3">
+
+  <div class="bouquet">💐🌷🌸💐</div>
+
+  <div class="final-text">
+    Sending you this virtual bouquet 💐❤️<br><br>
+    And lots of hugs & kisses 🤍🥺
+  </div>
+
+</div>
+
 <script>
+
 const text = `Hiii love ❤️,
 
 Deb… I don’t know how, but the way I feel for you is really different 🥺💕  
@@ -215,17 +217,23 @@ function openLetter() {
   document.getElementById("music").play();
 }
 
-// typing
+// typing effect
 let i = 0;
 function typeWriter() {
   if (i < text.length) {
     document.getElementById("letterText").innerHTML += text.charAt(i);
     i++;
-    setTimeout(typeWriter, 30);
+    setTimeout(typeWriter, 25);
   }
 }
 
-// hearts
+// go to bouquet page
+function goToBouquet() {
+  document.getElementById("page2").classList.add("hidden");
+  document.getElementById("page3").classList.remove("hidden");
+}
+
+// floating hearts
 function hearts() {
   setInterval(() => {
     let heart = document.createElement("div");
@@ -237,17 +245,8 @@ function hearts() {
     setTimeout(() => heart.remove(), 5000);
   }, 300);
 }
-<script>
-function openLetter() {
-  document.getElementById("page1").style.display = "none";
-  document.getElementById("page2").classList.remove("hidden");
-  typeWriter();
-  hearts();
-}
 
-function showBouquet() {
-  document.getElementById("bouquetPage").classList.remove("hidden");
-}
 </script>
+
 </body>
 </html>
