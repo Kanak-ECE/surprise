@@ -7,7 +7,7 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI';
+  font-family: Arial;
   background: black;
   color: white;
   text-align: center;
@@ -39,13 +39,14 @@ body {
   border-bottom: 60px solid red;
 }
 
+/* Hidden */
 .hidden { display: none; }
 
-/* Fade text */
+/* Text */
 .text {
   font-size: 18px;
   opacity: 0;
-  transition: opacity 1s;
+  transition: 1s;
 }
 .show { opacity: 1; }
 
@@ -55,7 +56,7 @@ body {
   border-radius: 20px;
   position: absolute;
   opacity: 0;
-  transition: opacity 1s;
+  transition: 1s;
 }
 .active { opacity: 1 !important; }
 
@@ -76,14 +77,6 @@ body {
   margin-top: 20px;
   opacity: 0;
   transition: 1s;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 18px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
 }
 </style>
 </head>
@@ -109,19 +102,12 @@ button {
     I really, really like you ❤️
   </p>
 
-  <!-- Photos -->
+  <!-- Photos (abhi blank rakh rahe hain test ke liye) -->
   <div class="slideshow" style="margin-top:20px;">
-    <img src="PASTE_IMAGE_LINK_1" class="slide active">
-    <img src="PASTE_IMAGE_LINK_2" class="slide">
-    <img src="PASTE_IMAGE_LINK_3" class="slide">
-    <img src="PASTE_IMAGE_LINK_4" class="slide">
+    <!-- yaha baad me images daalenge -->
   </div>
 
   <div id="final" class="final">I LIKE ME BETTER WITH YOU ❤️</div>
-
-  <button id="surpriseBtn" class="hidden" onclick="surprise()">Tap again ❤️</button>
-
- 
 
 </div>
 
@@ -130,35 +116,19 @@ function startLove() {
   document.getElementById("start").style.display = "none";
   document.getElementById("main").classList.remove("hidden");
 
-  document.getElementById("music").play();
-
-  // text timing (song vibe)
   setTimeout(()=> show("t1"), 500);
   setTimeout(()=> show("t2"), 2500);
   setTimeout(()=> show("t3"), 4500);
   setTimeout(()=> show("t4"), 6500);
   setTimeout(()=> {
     document.getElementById("final").style.opacity = 1;
-    document.getElementById("surpriseBtn").classList.remove("hidden");
   }, 9000);
 
-  startSlide();
   hearts();
 }
 
 function show(id){
   document.getElementById(id).classList.add("show");
-}
-
-// slideshow
-let index = 0;
-function startSlide() {
-  let slides = document.querySelectorAll(".slide");
-  setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-  }, 2500);
 }
 
 // hearts
@@ -172,11 +142,6 @@ function hearts() {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 5000);
   }, 300);
-}
-
-// surprise
-function surprise(){
-  alert("I really like you so much Deb ❤️🥺");
 }
 </script>
 
