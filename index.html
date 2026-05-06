@@ -7,13 +7,13 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: black;
-  color: white;
+  font-family: 'Segoe UI';
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: #fff;
   text-align: center;
-  overflow: hidden;
 }
 
+/* Center */
 .container {
   height: 100vh;
   display: flex;
@@ -22,126 +22,104 @@ body {
   flex-direction: column;
 }
 
-/* Envelope */
+/* Envelope (better look) */
 .envelope {
-  width: 200px;
-  height: 120px;
-  background: white;
+  width: 220px;
+  height: 150px;
+  background: #fff;
   border-radius: 10px;
-  cursor: pointer;
   position: relative;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+
 .envelope:before {
   content: "";
   position: absolute;
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
-  border-bottom: 60px solid red;
+  border-left: 110px solid transparent;
+  border-right: 110px solid transparent;
+  border-top: 75px solid #ff4b5c;
+  top: 0;
+  left: 0;
+}
+
+.envelope:after {
+  content: "💌";
+  position: absolute;
+  font-size: 28px;
+  bottom: 10px;
+  right: 10px;
 }
 
 /* Hidden */
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
-/* Text */
+/* Letter text */
 .text {
   font-size: 18px;
-  opacity: 0;
-  transition: 1s;
-}
-.show { opacity: 1; }
-
-/* Slideshow */
-.slideshow img {
-  width: 240px;
-  border-radius: 20px;
-  position: absolute;
-  opacity: 0;
-  transition: 1s;
-}
-.active { opacity: 1 !important; }
-
-/* Hearts */
-.heart {
-  position: absolute;
-  color: pink;
-  animation: float 5s linear infinite;
-}
-@keyframes float {
-  0% { transform: translateY(100vh); }
-  100% { transform: translateY(-10vh); }
+  margin: 8px 20px;
+  max-width: 320px;
 }
 
-/* Final */
+/* Final line */
 .final {
-  font-size: 28px;
+  font-size: 24px;
   margin-top: 20px;
-  opacity: 0;
-  transition: 1s;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Start -->
-<div class="container" id="start">
+<!-- Page 1 -->
+<div class="container" id="page1">
   <h2>For Deb ❤️</h2>
-  <div class="envelope" onclick="startLove()"></div>
-  <p>Tap to open 💌</p>
+  <div class="envelope" onclick="openLetter()"></div>
+  <p>Tap the envelope 💌</p>
 </div>
 
-<!-- Main -->
-<div class="container hidden" id="main">
+<!-- Page 2 -->
+<div class="container hidden" id="page2">
 
-  <div id="t1" class="text">Hiii love ❤️</div>
-  <div id="t2" class="text">The way I feel for you is really different 🥺💕</div>
-  <div id="t3" class="text">I really like being around you ❤️</div>
+  <div class="text">Hiii love ❤️</div>
 
-  <p id="t4" class="text" style="max-width:300px;">
-    It’s just been a month, but it already feels really nice having you in my life 💕<br><br>
-    I really, really like you ❤️
-  </p>
-
-  <!-- Photos (abhi blank rakh rahe hain test ke liye) -->
-  <div class="slideshow" style="margin-top:20px;">
-    <!-- yaha baad me images daalenge -->
+  <div class="text">
+    Deb… I don’t know how, but the way I feel for you is really different 🥺💕
   </div>
 
-  <div id="final" class="final">I LIKE ME BETTER WITH YOU ❤️</div>
+  <div class="text">
+    Being with you just makes everything feel better… even small things feel special when it’s you ❤️
+  </div>
+
+  <div class="text">
+    I really love our calls… especially when you stay awake just to talk to me 🥺  
+    And when you fall asleep on call, it feels so comforting 🤍
+  </div>
+
+  <div class="text">
+    I love talking to you,  
+    I love listening to you,  
+    I love being with you ❤️
+  </div>
+
+  <div class="text">
+    It’s just been a month… but it already feels really nice having you in my life 💕
+  </div>
+
+  <div class="text">
+    I really, really like you ❤️
+  </div>
+
+  <div class="final">I LIKE ME BETTER WITH YOU ❤️</div>
 
 </div>
 
 <script>
-function startLove() {
-  document.getElementById("start").style.display = "none";
-  document.getElementById("main").classList.remove("hidden");
-
-  setTimeout(()=> show("t1"), 500);
-  setTimeout(()=> show("t2"), 2500);
-  setTimeout(()=> show("t3"), 4500);
-  setTimeout(()=> show("t4"), 6500);
-  setTimeout(()=> {
-    document.getElementById("final").style.opacity = 1;
-  }, 9000);
-
-  hearts();
-}
-
-function show(id){
-  document.getElementById(id).classList.add("show");
-}
-
-// hearts
-function hearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (10 + Math.random()*20) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
+function openLetter() {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").classList.remove("hidden");
 }
 </script>
 
