@@ -7,22 +7,23 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI';
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  font-family: 'Georgia', serif;
+  background: #0d0d0d;
   color: #fff;
   text-align: center;
+  overflow-x: hidden;
 }
 
 /* Center */
 .container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-/* Envelope (better look) */
+/* Envelope */
 .envelope {
   width: 220px;
   height: 150px;
@@ -30,7 +31,10 @@ body {
   border-radius: 10px;
   position: relative;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.5s;
+}
+.envelope:hover {
+  transform: scale(1.05);
 }
 
 .envelope:before {
@@ -40,7 +44,6 @@ body {
   border-right: 110px solid transparent;
   border-top: 75px solid #ff4b5c;
   top: 0;
-  left: 0;
 }
 
 .envelope:after {
@@ -52,21 +55,72 @@ body {
 }
 
 /* Hidden */
-.hidden {
-  display: none;
+.hidden { display: none; }
+
+/* Letter */
+.letter {
+  background: #f5e6c8;
+  color: #3e2f1c;
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 350px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-line;
+  animation: zoom 20s ease-in-out infinite alternate;
 }
 
-/* Letter text */
-.text {
-  font-size: 18px;
-  margin: 8px 20px;
-  max-width: 320px;
+/* slow zoom */
+@keyframes zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
 }
 
-/* Final line */
+/* Photos */
+.photos {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.photos img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 3px dashed white;
+  transform: rotate(-3deg);
+  transition: 0.3s;
+}
+
+.photos img:hover {
+  transform: scale(1.1) rotate(0deg);
+}
+
+.photos img:nth-child(even) {
+  transform: rotate(3deg);
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  bottom: 0;
+  color: pink;
+  animation: float 5s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Final */
 .final {
-  font-size: 24px;
   margin-top: 20px;
+  font-size: 22px;
 }
 </style>
 </head>
@@ -83,43 +137,96 @@ body {
 <!-- Page 2 -->
 <div class="container hidden" id="page2">
 
-  <div class="text">Hiii love ❤️</div>
+  <div class="letter" id="letterText"></div>
 
-  <div class="text">
-    Deb… I don’t know how, but the way I feel for you is really different 🥺💕
-  </div>
-
-  <div class="text">
-    Being with you just makes everything feel better… even small things feel special when it’s you ❤️
-  </div>
-
-  <div class="text">
-    I really love our calls… especially when you stay awake just to talk to me 🥺  
-    And when you fall asleep on call, it feels so comforting 🤍
-  </div>
-
-  <div class="text">
-    I love talking to you,  
-    I love listening to you,  
-    I love being with you ❤️
-  </div>
-
-  <div class="text">
-    It’s just been a month… but it already feels really nice having you in my life 💕
-  </div>
-
-  <div class="text">
-    I really, really like you ❤️
+  <div class="photos">
+    <img src="https://i.ibb.co/8DyD33qR/img1.jpg">
+    <img src="https://i.ibb.co/Lh2SsMH2/img2.jpg">
+    <img src="https://i.ibb.co/VYvvVWY3/img3.jpg">
+    <img src="https://i.ibb.co/TBqKtxhK/img4.jpg">
+    <img src="https://i.ibb.co/M5NXhHQk/img5.jpg">
+    <img src="https://i.ibb.co/KY84mDk/img6.jpg">
+    <img src="https://i.ibb.co/Wvw23ms1/img7.jpg">
+    <img src="https://i.ibb.co/DPwyJbC1/img8.jpg">
+    <img src="https://i.ibb.co/Q36Lb0Xy/img9.jpg">
   </div>
 
   <div class="final">I LIKE ME BETTER WITH YOU ❤️</div>
 
+  <!-- 🎶 MUSIC -->
+  <audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
 </div>
 
 <script>
+const text = `Hiii love ❤️,
+
+Deb… I don’t know how, but the way I feel for you is really different 🥺💕  
+It’s something new for me… something I’ve honestly never felt like this before…
+
+Being with you just makes everything feel better.  
+Even the smallest things feel special when it’s you… ❤️
+
+I really love our calls… especially when you stay awake just to talk to me 🥺  
+And when you fall asleep on call, it feels so peaceful… like everything is just right 🤍
+
+I love talking to you, I love listening to you, I love being with you ❤️  
+Sometimes I catch myself smiling for no reason… and then I realize it’s because of you 💕
+
+I miss you waking me up…  
+I miss our late night calls…  
+but somehow we still manage everything, and that makes it even more special 🥺
+
+I know the time coming ahead might be a little difficult…  
+but I’ll manage ❤️  
+and you will too, I know you will…
+
+Even when you’re not around,  
+I’ll still share every little detail of my day with you,  
+and I’ll keep telling you how much I miss you…
+
+Because I know… I’m really going to miss you 🥺
+
+But it’s okay…  
+I think I’ve gotten used to you now ❤️
+
+It’s just been a month… but it already feels really special having you in my life…
+
+I don’t know where this will go…  
+but right now, I’m really happy that it’s you ❤️
+
+I really, really like you 💕`;
 function openLetter() {
   document.getElementById("page1").style.display = "none";
   document.getElementById("page2").classList.remove("hidden");
+  typeWriter();
+  hearts();
+  document.getElementById("music").play();
+}
+
+// typing
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("letterText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 30);
+  }
+}
+
+// hearts
+function hearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
 }
 </script>
 
