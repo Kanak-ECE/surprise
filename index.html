@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Deb ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI';
+  background: black;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Envelope */
+.envelope {
+  width: 200px;
+  height: 120px;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+}
+.envelope:before {
+  content: "";
+  position: absolute;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 60px solid red;
+}
+
+.hidden { display: none; }
+
+/* Fade text */
+.text {
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.show { opacity: 1; }
+
+/* Slideshow */
+.slideshow img {
+  width: 240px;
+  border-radius: 20px;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.active { opacity: 1 !important; }
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  animation: float 5s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(100vh); }
+  100% { transform: translateY(-10vh); }
+}
+
+/* Final */
+.final {
+  font-size: 28px;
+  margin-top: 20px;
+  opacity: 0;
+  transition: 1s;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Start -->
+<div class="container" id="start">
+  <h2>For Deb ❤️</h2>
+  <div class="envelope" onclick="startLove()"></div>
+  <p>Tap to open 💌</p>
+</div>
+
+<!-- Main -->
+<div class="container hidden" id="main">
+
+  <div id="t1" class="text">Hiii love ❤️</div>
+  <div id="t2" class="text">The way I feel for you is really different 🥺💕</div>
+  <div id="t3" class="text">I really like being around you ❤️</div>
+
+  <p id="t4" class="text" style="max-width:300px;">
+    It’s just been a month, but it already feels really nice having you in my life 💕<br><br>
+    I really, really like you ❤️
+  </p>
+
+  <!-- Photos -->
+  <div class="slideshow" style="margin-top:20px;">
+    <img src="PASTE_IMAGE_LINK_1" class="slide active">
+    <img src="PASTE_IMAGE_LINK_2" class="slide">
+    <img src="PASTE_IMAGE_LINK_3" class="slide">
+    <img src="PASTE_IMAGE_LINK_4" class="slide">
+  </div>
+
+  <div id="final" class="final">I LIKE ME BETTER WITH YOU ❤️</div>
+
+  <button id="surpriseBtn" class="hidden" onclick="surprise()">Tap again ❤️</button>
+
+ 
+
+</div>
+
+<script>
+function startLove() {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("main").classList.remove("hidden");
+
+  document.getElementById("music").play();
+
+  // text timing (song vibe)
+  setTimeout(()=> show("t1"), 500);
+  setTimeout(()=> show("t2"), 2500);
+  setTimeout(()=> show("t3"), 4500);
+  setTimeout(()=> show("t4"), 6500);
+  setTimeout(()=> {
+    document.getElementById("final").style.opacity = 1;
+    document.getElementById("surpriseBtn").classList.remove("hidden");
+  }, 9000);
+
+  startSlide();
+  hearts();
+}
+
+function show(id){
+  document.getElementById(id).classList.add("show");
+}
+
+// slideshow
+let index = 0;
+function startSlide() {
+  let slides = document.querySelectorAll(".slide");
+  setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }, 2500);
+}
+
+// hearts
+function hearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
+
+// surprise
+function surprise(){
+  alert("I really like you so much Deb ❤️🥺");
+}
+</script>
+
+</body>
+</html>
