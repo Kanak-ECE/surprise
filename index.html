@@ -235,9 +235,17 @@ function hearts() {
     setTimeout(() => heart.remove(), 5000);
   }, 300);
 }
-</script>
+<script>
+function openLetter() {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").classList.remove("hidden");
+  typeWriter();
+  hearts();
+}
+
 function showBouquet() {
   document.getElementById("bouquetPage").classList.remove("hidden");
 }
+</script>
 </body>
 </html>
