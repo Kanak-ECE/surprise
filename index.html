@@ -1,5 +1,3 @@
-# Professional Romantic Letter Experience (HTML)
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -235,18 +233,18 @@ body{
     color:#d7d0ca;
 }
 
-/* rolled letter */
+/* simple folded letter */
 
 .scroll{
-    width:520px;
-    height:150px;
+    width:460px;
+    height:260px;
 
     position:relative;
 
-    border-radius:80px;
-
     background:
-    linear-gradient(to bottom, #d4af88, #b88b62);
+    linear-gradient(to bottom, #d4af88, #bb8d63);
+
+    border-radius:12px;
 
     cursor:pointer;
 
@@ -269,36 +267,11 @@ body{
     inset:0;
 
     background:
-    repeating-linear-gradient(
-    45deg,
-    rgba(255,255,255,0.04),
-    rgba(255,255,255,0.04) 2px,
-    transparent 2px,
-    transparent 7px
-    );
-}
+    radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
 
-.roll{
-    position:absolute;
-    top:0;
-
-    width:100px;
-    height:150px;
-
-    border-radius:50%;
-
-    background:
-    linear-gradient(to bottom, #9f734f, #7d5639);
-
-    box-shadow:inset 0 0 20px rgba(0,0,0,0.25);
-}
-
-.roll.left{
-    left:-35px;
-}
-
-.roll.right{
-    right:-35px;
+    background-size:12px 12px;
+    background-position:0 0, 6px 6px;
 }
 
 .ribbon{
@@ -308,15 +281,11 @@ body{
 
     transform:translate(-50%, -50%);
 
-    width:95px;
-    height:170px;
+    width:90px;
+    height:100%;
 
     background:
     linear-gradient(to bottom, #7a1f2f, #5e1220);
-
-    border-radius:8px;
-
-    box-shadow:0 0 12px rgba(0,0,0,0.3);
 }
 
 .ribbon::before{
@@ -327,7 +296,7 @@ body{
 
     transform:translate(-50%, -50%);
 
-    font-size:58px;
+    font-size:56px;
 }
 
 /* letter */
@@ -450,6 +419,14 @@ body{
 .bouquet-wrap{
     position:relative;
     animation:fadeIn 1.2s ease;
+}
+
+.bouquet-emoji{
+    font-size:180px;
+
+    animation:bouquetMove 3s ease-in-out infinite alternate;
+
+    filter:drop-shadow(0 12px 20px rgba(0,0,0,0.35));
 }
 
 .bouquet-img{
@@ -622,9 +599,6 @@ body{
 
     <div class="scroll" onclick="openPage3()">
 
-        <div class="roll left"></div>
-        <div class="roll right"></div>
-
         <div class="ribbon"></div>
 
     </div>
@@ -653,10 +627,9 @@ body{
 
     <div class="bouquet-wrap" id="bouquetWrap">
 
-        <img
-        class="bouquet-img"
-        src="https://i.ibb.co/nwQJ4dW/real-bouquet.png"
-        alt="bouquet">
+        <div class="bouquet-emoji">
+            💐
+        </div>
 
         <div class="card" onclick="openCard()">
             Tap the card 💌
