@@ -1,9 +1,16 @@
+# Professional Romantic Letter Experience (HTML)
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>For Deb ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,23 +21,28 @@
 }
 
 body{
-    background:#0d0d0d;
+    background:
+    radial-gradient(circle at top, rgba(120,30,30,0.18), transparent 30%),
+    linear-gradient(to bottom, #0a0a0a, #151515);
+
     overflow:hidden;
-    font-family:'Georgia', serif;
     color:white;
+    font-family:'Cormorant Garamond', serif;
 }
 
-/* COMMON */
-
 .container{
-    min-height:100vh;
     width:100%;
+    min-height:100vh;
+
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
+
     position:relative;
+
     padding:20px;
+
     text-align:center;
 }
 
@@ -38,175 +50,220 @@ body{
     display:none;
 }
 
-/* BACKGROUND GLOW */
+/* floating particles */
 
-body::before{
-    content:"";
+.sparkle{
     position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(circle at top, rgba(255,80,80,0.15), transparent 40%),
-    radial-gradient(circle at bottom, rgba(255,255,255,0.05), transparent 40%);
-
+    bottom:-20px;
+    color:rgba(255,210,210,0.7);
+    animation:floatUp linear infinite;
     pointer-events:none;
 }
 
-/* FLOATING HEARTS */
-
-.heart{
-    position:fixed;
-    bottom:0;
-    color:#ff8fb1;
-    animation:float 5s linear infinite;
-    z-index:999;
-}
-
-@keyframes float{
+@keyframes floatUp{
 
     0%{
         transform:translateY(0);
+        opacity:0;
+    }
+
+    10%{
         opacity:1;
     }
 
     100%{
-        transform:translateY(-100vh);
+        transform:translateY(-110vh);
         opacity:0;
     }
 }
 
-/* TITLE */
+/* title */
 
-.title{
-    font-size:58px;
-    margin-bottom:40px;
-    animation:glow 2s ease infinite alternate;
+.main-title{
+    font-size:72px;
+    font-weight:400;
+    margin-bottom:55px;
+
+    letter-spacing:2px;
+
+    animation:softGlow 3s ease-in-out infinite alternate;
 }
 
-@keyframes glow{
+@keyframes softGlow{
 
     from{
-        text-shadow:0 0 10px rgba(255,255,255,0.2);
+        text-shadow:0 0 12px rgba(255,255,255,0.1);
     }
 
     to{
-        text-shadow:0 0 25px rgba(255,255,255,0.7);
+        text-shadow:0 0 24px rgba(255,255,255,0.4);
     }
 }
 
-/* ENVELOPE */
+/* envelope */
+
+.envelope-wrap{
+    position:relative;
+}
 
 .envelope{
-    width:360px;
-    height:240px;
-    background:#fffdf9;
+    width:460px;
+    height:310px;
+
     position:relative;
-    border-radius:12px;
+
     cursor:pointer;
-    transition:0.4s;
-    box-shadow:0 10px 35px rgba(0,0,0,0.5);
+
+    transition:0.5s;
+
+    filter:drop-shadow(0 20px 35px rgba(0,0,0,0.5));
 }
 
 .envelope:hover{
-    transform:scale(1.03);
+    transform:translateY(-8px) scale(1.01);
 }
 
-/* TOP FLAP */
+/* envelope body */
 
-.envelope::before{
-    content:"";
+.envelope-base{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(to bottom, #fffdf9, #ece7de);
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+/* lower folds */
+
+.fold-left,
+.fold-right{
+    position:absolute;
+    bottom:0;
+    width:50%;
+    height:100%;
+}
+
+.fold-left{
+    left:0;
+
+    clip-path:polygon(0 100%, 100% 100%, 100% 0);
+
+    background:linear-gradient(to right, #f5f0e8, #ddd5ca);
+}
+
+.fold-right{
+    right:0;
+
+    clip-path:polygon(0 0, 0 100%, 100% 100%);
+
+    background:linear-gradient(to left, #f5f0e8, #ddd5ca);
+}
+
+/* top flap */
+
+.top-flap{
     position:absolute;
     top:0;
     left:0;
 
-    width:0;
-    height:0;
+    width:100%;
+    height:100%;
 
-    border-left:180px solid transparent;
-    border-right:180px solid transparent;
-    border-top:125px solid #8b4a3f;
+    clip-path:polygon(0 0, 50% 58%, 100% 0);
 
-    z-index:2;
+    background:
+    linear-gradient(to bottom, #8d4a3c, #6b3429);
+
+    z-index:3;
 }
 
-/* LOWER FOLD */
+/* paper texture */
 
-.envelope::after{
-    content:"";
+.paper-noise{
     position:absolute;
-    bottom:0;
-    left:0;
+    inset:0;
 
-    width:0;
-    height:0;
+    opacity:0.16;
 
-    border-left:180px solid #fffdf9;
-    border-right:180px solid #fffdf9;
-    border-top:120px solid transparent;
+    background-image:
+    radial-gradient(rgba(0,0,0,0.6) 0.6px, transparent 0.6px);
+
+    background-size:10px 10px;
 }
 
-/* SEAL */
+/* wax seal */
 
 .seal{
     position:absolute;
-    top:88px;
+    top:145px;
     left:50%;
+
     transform:translateX(-50%);
 
-    width:62px;
-    height:62px;
+    width:78px;
+    height:78px;
 
-    background:white;
     border-radius:50%;
+
+    background:
+    radial-gradient(circle at top, #fff, #ece5dc);
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-size:28px;
-    color:#8b4a3f;
-
     z-index:5;
 
-    box-shadow:0 5px 12px rgba(0,0,0,0.25);
+    box-shadow:
+    0 10px 20px rgba(0,0,0,0.22),
+    inset 0 3px 8px rgba(255,255,255,0.9);
 }
 
-/* TAP TEXT */
-
-.tap{
-    margin-top:25px;
-    font-size:20px;
-    color:#ddd;
+.seal span{
+    font-size:34px;
+    color:#8d4a3c;
 }
 
-/* ROLLED LETTER */
+.tap-text{
+    margin-top:35px;
+    font-size:24px;
+    letter-spacing:1px;
+    color:#d7d0ca;
+}
 
-.rolled-letter{
-    width:360px;
-    height:120px;
+/* rolled letter */
 
-    background:#b98d68;
-
-    border-radius:60px;
+.scroll{
+    width:520px;
+    height:150px;
 
     position:relative;
 
-    overflow:hidden;
+    border-radius:80px;
+
+    background:
+    linear-gradient(to bottom, #d4af88, #b88b62);
 
     cursor:pointer;
 
+    overflow:hidden;
+
+    box-shadow:
+    0 20px 35px rgba(0,0,0,0.45),
+    inset 0 0 30px rgba(255,255,255,0.08);
+
     transition:0.4s;
-
-    box-shadow:0 10px 35px rgba(0,0,0,0.45);
 }
 
-.rolled-letter:hover{
-    transform:scale(1.03);
+.scroll:hover{
+    transform:translateY(-5px);
 }
 
-/* CRACKY TEXTURE */
-
-.rolled-letter::before{
+.scroll::before{
     content:"";
     position:absolute;
     inset:0;
@@ -217,72 +274,49 @@ body::before{
     rgba(255,255,255,0.04),
     rgba(255,255,255,0.04) 2px,
     transparent 2px,
-    transparent 6px
+    transparent 7px
     );
-
-    opacity:0.5;
 }
 
-/* ROLLED SIDES */
-
-.roll-left,
-.roll-right{
+.roll{
     position:absolute;
     top:0;
-    width:65px;
-    height:120px;
 
-    background:#9c7454;
+    width:100px;
+    height:150px;
 
     border-radius:50%;
-}
 
-.roll-left{
-    left:-20px;
-}
-
-.roll-right{
-    right:-20px;
-}
-
-/* CRACKY EDGES */
-
-.crack{
-    position:absolute;
-    width:100%;
-    height:10px;
     background:
-    repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 5px,
-    rgba(0,0,0,0.15) 5px,
-    rgba(0,0,0,0.15) 8px
-    );
+    linear-gradient(to bottom, #9f734f, #7d5639);
+
+    box-shadow:inset 0 0 20px rgba(0,0,0,0.25);
 }
 
-.top-crack{
-    top:0;
+.roll.left{
+    left:-35px;
 }
 
-.bottom-crack{
-    bottom:0;
+.roll.right{
+    right:-35px;
 }
-
-/* RIBBON */
 
 .ribbon{
     position:absolute;
     top:50%;
     left:50%;
+
     transform:translate(-50%, -50%);
 
-    width:100px;
-    height:130px;
+    width:95px;
+    height:170px;
 
-    background:#7b1f2b;
+    background:
+    linear-gradient(to bottom, #7a1f2f, #5e1220);
 
     border-radius:8px;
+
+    box-shadow:0 0 12px rgba(0,0,0,0.3);
 }
 
 .ribbon::before{
@@ -290,80 +324,45 @@ body::before{
     position:absolute;
     top:50%;
     left:50%;
+
     transform:translate(-50%, -50%);
-    font-size:55px;
+
+    font-size:58px;
 }
 
-/* MAIN LETTER */
+/* letter */
 
 .letter{
-    width:430px;
-    max-height:78vh;
+    width:560px;
+    max-height:82vh;
 
     overflow:auto;
 
-    background:#c79c72;
+    background:
+    linear-gradient(to bottom, #d8b48c, #c09267);
 
-    color:#3b2417;
+    color:#3d281b;
 
-    padding:35px;
+    padding:60px;
 
-    border-radius:8px;
-
-    line-height:1.9;
-
-    font-size:17px;
+    border-radius:4px;
 
     text-align:left;
 
-    white-space:pre-line;
+    line-height:2;
 
-    box-shadow:0 10px 40px rgba(0,0,0,0.55);
+    font-size:22px;
 
     position:relative;
 
-    animation:paperFloat 4s ease-in-out infinite alternate;
+    box-shadow:
+    0 30px 60px rgba(0,0,0,0.45),
+    inset 0 0 50px rgba(255,255,255,0.08);
+
+    animation:letterFloat 4s ease-in-out infinite alternate;
 }
 
-/* PAPER TEXTURE */
-
-.letter::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-    radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
-
-    background-size:14px 14px;
-    background-position:0 0, 7px 7px;
-
-    pointer-events:none;
-}
-
-/* CRACKY EDGES */
-
-.letter::after{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    border:10px solid transparent;
-
-    border-image:
-    repeating-linear-gradient(
-    45deg,
-    rgba(90,50,30,0.5) 0px,
-    rgba(90,50,30,0.5) 3px,
-    transparent 3px,
-    transparent 8px
-    ) 10;
-
-    pointer-events:none;
-}
-
-@keyframes paperFloat{
+@keyframes letterFloat{
 
     from{
         transform:translateY(0);
@@ -374,45 +373,92 @@ body::before{
     }
 }
 
-/* BUTTON */
+/* paper texture */
 
-.btn{
-    margin-top:25px;
+.letter::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+
+    background-size:12px 12px;
+    background-position:0 0, 6px 6px;
+
+    pointer-events:none;
+}
+
+/* realistic edges */
+
+.letter::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    border:16px solid transparent;
+
+    border-image:
+    url("https://i.ibb.co/Gtxh6nH/paper-edge.png") 30 round;
+
+    opacity:0.4;
+
+    pointer-events:none;
+}
+
+.letter::-webkit-scrollbar{
+    width:6px;
+}
+
+.letter::-webkit-scrollbar-thumb{
+    background:#7a4c31;
+    border-radius:10px;
+}
+
+.next-btn{
+    margin-top:28px;
+
+    padding:14px 34px;
 
     border:none;
+    border-radius:40px;
 
-    padding:14px 30px;
-
-    border-radius:30px;
-
-    background:#8b4a3f;
+    background:linear-gradient(to right, #8d4a3c, #6b3429);
 
     color:white;
 
-    font-size:17px;
+    font-size:18px;
 
     cursor:pointer;
 
     transition:0.3s;
 
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    font-family:'Cormorant Garamond', serif;
+
+    letter-spacing:1px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,0.25);
 }
 
-.btn:hover{
-    transform:scale(1.05);
+.next-btn:hover{
+    transform:translateY(-3px);
 }
 
-/* BOUQUET */
+/* bouquet */
 
 .bouquet-wrap{
     position:relative;
-    animation:fadeIn 1.5s ease;
+    animation:fadeIn 1.2s ease;
 }
 
-.bouquet{
-    width:360px;
+.bouquet-img{
+    width:470px;
+
+    filter:
+    drop-shadow(0 20px 30px rgba(0,0,0,0.45));
+
     animation:bouquetMove 3s ease-in-out infinite alternate;
-    filter:drop-shadow(0 0 15px rgba(255,0,80,0.2));
 }
 
 @keyframes bouquetMove{
@@ -426,32 +472,28 @@ body::before{
     }
 }
 
-/* CARD */
-
-.hang-card{
+.card{
     position:absolute;
-    bottom:60px;
+    bottom:55px;
     left:50%;
 
     transform:translateX(-50%);
 
-    width:180px;
+    width:200px;
 
-    background:#f2dcc2;
+    background:#efe0cb;
 
-    color:#3d2418;
+    color:#3f291d;
 
-    padding:18px;
+    padding:20px;
 
     border-radius:8px;
 
     cursor:pointer;
 
-    font-size:20px;
+    font-size:22px;
 
-    line-height:1.5;
-
-    box-shadow:0 5px 15px rgba(0,0,0,0.35);
+    box-shadow:0 12px 25px rgba(0,0,0,0.35);
 
     animation:swing 2s ease-in-out infinite alternate;
 }
@@ -467,64 +509,63 @@ body::before{
     }
 }
 
-/* OPEN CARD */
-
 .open-card{
-    width:320px;
+    width:420px;
 
-    background:#f2dcc2;
+    background:#efe0cb;
 
-    color:#3d2418;
+    color:#3f291d;
 
-    padding:35px;
+    padding:50px;
 
-    border-radius:10px;
+    border-radius:8px;
 
-    line-height:1.9;
+    line-height:2;
 
-    font-size:24px;
+    font-size:28px;
+
+    box-shadow:0 20px 35px rgba(0,0,0,0.4);
 
     animation:fadeIn 1s ease;
-
-    box-shadow:0 10px 35px rgba(0,0,0,0.45);
 }
 
-/* HUG SECTION */
+/* final */
 
-.hug-section{
+.final-box{
     animation:fadeIn 1.5s ease;
 }
 
 .couple{
-    font-size:95px;
-    animation:hug 2s ease-in-out infinite alternate;
+    font-size:90px;
+    animation:softHug 2s ease-in-out infinite alternate;
 }
 
-@keyframes hug{
+@keyframes softHug{
 
     from{
         transform:scale(1);
     }
 
     to{
-        transform:scale(1.05);
+        transform:scale(1.04);
     }
 }
 
-.hug-text{
-    margin-top:18px;
-    font-size:26px;
-    max-width:420px;
-    line-height:1.6;
-}
+.final-text{
+    margin-top:20px;
 
-/* FADE */
+    font-size:34px;
+
+    max-width:540px;
+
+    line-height:1.7;
+}
 
 @keyframes fadeIn{
 
     from{
         opacity:0;
-        transform:translateY(20px);
+        transform:translateY(25px);
     }
 
     to{
@@ -542,17 +583,34 @@ body::before{
 
 <div class="container" id="page1">
 
-    <div class="title">
+    <div class="main-title">
         For Deb ❤️
     </div>
 
-    <div class="envelope" onclick="openPage2()">
+    <div class="envelope-wrap">
 
-        <div class="seal">♡</div>
+        <div class="envelope" onclick="openPage2()">
+
+            <div class="envelope-base">
+
+                <div class="fold-left"></div>
+                <div class="fold-right"></div>
+
+                <div class="paper-noise"></div>
+
+            </div>
+
+            <div class="top-flap"></div>
+
+            <div class="seal">
+                <span>♡</span>
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="tap">
+    <div class="tap-text">
         Tap the envelope 💌
     </div>
 
@@ -562,21 +620,16 @@ body::before{
 
 <div class="container hidden" id="page2">
 
-    <div class="rolled-letter" onclick="openPage3()">
+    <div class="scroll" onclick="openPage3()">
 
-        <div class="roll-left"></div>
-
-        <div class="roll-right"></div>
-
-        <div class="crack top-crack"></div>
-
-        <div class="crack bottom-crack"></div>
+        <div class="roll left"></div>
+        <div class="roll right"></div>
 
         <div class="ribbon"></div>
 
     </div>
 
-    <div class="tap">
+    <div class="tap-text">
         Touch the ribbon 🎀
     </div>
 
@@ -588,7 +641,7 @@ body::before{
 
     <div class="letter" id="letterText"></div>
 
-    <button class="btn" onclick="openBouquet()">
+    <button class="next-btn" onclick="openBouquet()">
         Next →
     </button>
 
@@ -598,33 +651,29 @@ body::before{
 
 <div class="container hidden" id="page4">
 
-    <!-- bouquet -->
-
     <div class="bouquet-wrap" id="bouquetWrap">
 
-        <img 
-        class="bouquet"
-        src="https://i.ibb.co/9m7K4jL/bouquet.png"
+        <img
+        class="bouquet-img"
+        src="https://i.ibb.co/nwQJ4dW/real-bouquet.png"
         alt="bouquet">
 
-        <div class="hang-card" onclick="openCard()">
+        <div class="card" onclick="openCard()">
             Tap the card 💌
         </div>
 
     </div>
 
-    <!-- open card -->
-
     <div class="hidden" id="cardSection">
 
         <div class="open-card">
 
-            Not everyone feels like magic  
+            Not everyone feels like magic
             but you do ❤️
 
             <br><br>
 
-            A little bouquet for someone  
+            A little bouquet for someone
             who means a lot ....
 
             <br><br>
@@ -633,7 +682,7 @@ body::before{
 
         </div>
 
-        <button class="btn" onclick="openHugs()">
+        <button class="next-btn" onclick="openFinal()">
             Next →
         </button>
 
@@ -645,13 +694,13 @@ body::before{
 
 <div class="container hidden" id="page5">
 
-    <div class="hug-section">
+    <div class="final-box">
 
         <div class="couple">
             🫂
         </div>
 
-        <div class="hug-text">
+        <div class="final-text">
             sending you all hugs and kisses and love ❤️
         </div>
 
@@ -669,44 +718,43 @@ body::before{
 
 const text = `Hiii love ❤️,
 
-Deb… I don’t know how, but the way I feel for you is really different 🥺💕  
+Deb… I don’t know how, but the way I feel for you is really different 🥺💕
 It’s something new for me… something I’ve honestly never felt like this before…
 
-Being with you just makes everything feel better.  
+Being with you just makes everything feel better.
 Even the smallest things feel special when it’s you… ❤️
 
-I really love our calls… especially when you stay awake just to talk to me 🥺  
+I really love our calls… especially when you stay awake just to talk to me 🥺
 And when you fall asleep on call, it feels so peaceful… like everything is just right 🤍
 
-I love talking to you, I love listening to you, I love being with you ❤️  
+I love talking to you, I love listening to you, I love being with you ❤️
 Sometimes I catch myself smiling for no reason… and then I realize it’s because of you 💕
 
-I miss you waking me up…  
-I miss our late night calls…  
+I miss you waking me up…
+I miss our late night calls…
 but somehow we still manage everything, and that makes it even more special 🥺
 
-I know the time coming ahead might be a little difficult…  
-but I’ll manage ❤️  
+I know the time coming ahead might be a little difficult…
+but I’ll manage ❤️
 and you will too, I know you will…
 
-Even when you’re not around,  
-I’ll still share every little detail of my day with you,  
+Even when you’re not around,
+I’ll still share every little detail of my day with you,
 and I’ll keep telling you how much I miss you…
 
 Because I know… I’m really going to miss you 🥺
 
-But it’s okay…  
+But it’s okay…
 I think I’ve gotten used to you now ❤️
 
 It’s just been a month… but it already feels really special having you in my life…
 
-I don’t know where this will go…  
+I don’t know where this will go…
 but right now, I’m really happy that it’s you ❤️
 
 I really, really like you 💕`;
 
-
-/* PAGE CHANGES */
+/* pages */
 
 function openPage2(){
 
@@ -715,9 +763,9 @@ function openPage2(){
     document.getElementById("page2")
     .classList.remove("hidden");
 
-    hearts();
-
     document.getElementById("music").play();
+
+    sparkles();
 }
 
 function openPage3(){
@@ -749,7 +797,7 @@ function openCard(){
     .classList.remove("hidden");
 }
 
-function openHugs(){
+function openFinal(){
 
     document.getElementById("page4")
     .classList.add("hidden");
@@ -758,7 +806,7 @@ function openHugs(){
     .classList.remove("hidden");
 }
 
-/* TYPEWRITER */
+/* typing */
 
 let i = 0;
 
@@ -771,37 +819,41 @@ function typeWriter(){
 
         i++;
 
-        setTimeout(typeWriter, 25);
+        setTimeout(typeWriter, 24);
     }
 }
 
-/* HEARTS */
+/* sparkles */
 
-function hearts(){
+function sparkles(){
 
     setInterval(()=>{
 
-        let heart=document.createElement("div");
+        let sparkle=document.createElement("div");
 
-        heart.className="heart";
+        sparkle.className="sparkle";
 
-        heart.innerHTML="💖";
+        sparkle.innerHTML="♥";
 
-        heart.style.left=Math.random()*100+"vw";
+        sparkle.style.left=Math.random()*100+"vw";
 
-        heart.style.fontSize=
-        (10 + Math.random()*20)+"px";
+        sparkle.style.fontSize=
+        (10 + Math.random()*18)+"px";
 
-        document.body.appendChild(heart);
+        sparkle.style.animationDuration=
+        (4 + Math.random()*4)+"s";
+
+        document.body.appendChild(sparkle);
 
         setTimeout(()=>{
-            heart.remove();
-        },5000);
+            sparkle.remove();
+        },8000);
 
-    },300);
+    },350);
 }
 
 </script>
 
 </body>
 </html>
+```
